@@ -1,0 +1,58 @@
+propel:
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+  abogado:
+    _attributes: { phpName: Abogado, idMethod: native }
+    id_abogado: { phpName: IdAbogado, type: TINYINT, size: '3', sqlType: 'tinyint(3) unsigned', primaryKey: true, autoIncrement: true, required: true }
+    apellido: { phpName: Apellido, type: VARCHAR, size: '45', required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
+    dni: { phpName: Dni, type: INTEGER, size: '10', required: true }
+    matricula: { phpName: Matricula, type: VARCHAR, size: '45', required: true }
+    telefono: { phpName: Telefono, type: VARCHAR, size: '40', required: false }
+    mail: { phpName: Mail, type: VARCHAR, size: '45', required: true }
+    contrasenia: { phpName: Contrasenia, type: VARCHAR, size: '8', sqlType: varbinary(8), required: true }
+    _uniques: { dni: [dni], matricula: [matricula], contrasenia: [contrasenia], mail: [mail] }
+  cliente:
+    _attributes: { phpName: Cliente, idMethod: native }
+    id_cliente: { phpName: IdCliente, type: SMALLINT, size: '5', sqlType: 'smallint(5) unsigned', primaryKey: true, autoIncrement: true, required: true }
+    apellido: { phpName: Apellido, type: VARCHAR, size: '50', required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, size: '50', required: true }
+    dni: { phpName: Dni, type: INTEGER, size: '15', required: true }
+    domicilio_real: { phpName: DomicilioReal, type: VARCHAR, size: '45', required: true }
+    telefono: { phpName: Telefono, type: VARCHAR, size: '20', required: false }
+    mail: { phpName: Mail, type: VARCHAR, size: '100', required: false }
+    _uniques: { dni: [dni] }
+  consulta:
+    _attributes: { phpName: Consulta, idMethod: native }
+    id_consulta: { phpName: IdConsulta, type: INTEGER, size: '10', sqlType: 'int(10) unsigned', primaryKey: true, autoIncrement: true, required: true }
+    fecha: { phpName: Fecha, type: TIMESTAMP, required: true, defaultExpr: CURRENT_TIMESTAMP }
+    abogado_id: { phpName: AbogadoId, type: TINYINT, size: '3', sqlType: 'tinyint(3) unsigned', required: true, foreignTable: abogado, foreignReference: id_abogado }
+    cliente_id: { phpName: ClienteId, type: SMALLINT, size: '5', sqlType: 'smallint(5) unsigned', required: true, foreignTable: cliente, foreignReference: id_cliente }
+    descripcion: { phpName: Descripcion, type: LONGVARCHAR, required: false }
+    _indexes: { abogado_id: [abogado_id], cliente_id: [cliente_id] }
+  expediente:
+    _attributes: { phpName: Expediente, idMethod: native }
+    id_expediente: { phpName: IdExpediente, type: INTEGER, size: '10', sqlType: 'int(10) unsigned', primaryKey: true, autoIncrement: true, required: true }
+    caratula: { phpName: Caratula, type: VARCHAR, size: '90', required: true }
+    num_expte: { phpName: NumExpte, type: INTEGER, size: '10', required: true }
+    anio: { phpName: Anio, type: INTEGER, size: '4', required: true }
+    juzgado: { phpName: Juzgado, type: VARCHAR, size: '45', required: true }
+    tipo_de_parte: { phpName: TipoDeParte, type: CHAR, required: true }
+    abogado_contraparte: { phpName: AbogadoContraparte, type: VARCHAR, size: '45', required: false }
+    nombre_contraparte: { phpName: NombreContraparte, type: VARCHAR, size: '45', required: true }
+    domicilio_const_contraparte: { phpName: DomicilioConstContraparte, type: VARCHAR, size: '45', required: false }
+    domicilio_real_contraparte: { phpName: DomicilioRealContraparte, type: VARCHAR, size: '45', required: false }
+    circunscripcion: { phpName: Circunscripcion, type: VARCHAR, size: '30', required: false }
+  expediente_cliente_abogado:
+    _attributes: { phpName: ExpedienteClienteAbogado, idMethod: native }
+    cliente_id: { phpName: ClienteId, type: SMALLINT, size: '5', sqlType: 'smallint(5) unsigned', primaryKey: true, required: true, defaultValue: '0', foreignTable: cliente, foreignReference: id_cliente }
+    abogado_id: { phpName: AbogadoId, type: TINYINT, size: '3', sqlType: 'tinyint(3) unsigned', primaryKey: true, required: true, defaultValue: '0', foreignTable: abogado, foreignReference: id_abogado }
+    expediente_id: { phpName: ExpedienteId, type: INTEGER, size: '10', sqlType: 'int(10) unsigned', primaryKey: true, required: true, defaultValue: '0', foreignTable: expediente, foreignReference: id_expediente }
+    _indexes: { abogado_id: [abogado_id], expediente_id: [expediente_id] }
+  ultimo_prov:
+    _attributes: { phpName: UltimoProv, idMethod: native }
+    id_prov: { phpName: IdProv, type: INTEGER, size: '10', sqlType: 'int(10) unsigned', primaryKey: true, autoIncrement: true, required: true }
+    id_expediente: { phpName: IdExpediente, type: INTEGER, size: '10', sqlType: 'int(10) unsigned', required: true, foreignTable: expediente, foreignReference: id_expediente }
+    ultimo_movimiento: { phpName: UltimoMovimiento, type: LONGVARCHAR, required: true }
+    _indexes: { id_expediente: [id_expediente] }
