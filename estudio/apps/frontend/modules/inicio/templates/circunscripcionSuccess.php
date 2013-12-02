@@ -21,13 +21,9 @@
 			</div>
 			<div class="span6">
 				<FORM METHOD = 'POST' ACTION = '<?php echo url_for('inicio/circunscripcion') ?>'>
-					<SELECT NAME = "juzgado"><?php
-						foreach($circunscripcion as $juzgado):?>
-						<option><?php printf("%s", $juzgado['nombre']);?></option>
-						<?php endforeach;?>
-					</SELECT>
-					<INPUT CLASS='btn btn-info' TYPE = 'submit' NAME = 'circunscripcion' VALUE = 'Enviar'></INPUT>
+					<INPUT CLASS='btn btn-info' TYPE = 'submit' NAME = 'circunscripcion' VALUE = 'Obtener'></INPUT>
 				</FORM>
+				Se enviará el listado con los juzgados pertenecientes a su circunscripción
 			</div>
 		</div>
 	</div>

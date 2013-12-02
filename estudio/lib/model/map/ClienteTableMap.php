@@ -41,7 +41,7 @@ class ClienteTableMap extends TableMap
         $this->addPrimaryKey('id_cliente', 'IdCliente', 'SMALLINT', true, 5, null);
         $this->addColumn('apellido', 'Apellido', 'VARCHAR', true, 50, null);
         $this->addColumn('nombre', 'Nombre', 'VARCHAR', true, 50, null);
-        $this->addColumn('dni', 'Dni', 'INTEGER', true, 15, null);
+        $this->addColumn('dni', 'Dni', 'INTEGER', true, 10, null);
         $this->addColumn('domicilio_real', 'DomicilioReal', 'VARCHAR', true, 45, null);
         $this->addColumn('telefono', 'Telefono', 'VARCHAR', false, 20, null);
         $this->addColumn('mail', 'Mail', 'VARCHAR', false, 100, null);

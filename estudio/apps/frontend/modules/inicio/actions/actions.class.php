@@ -56,40 +56,13 @@ class inicioActions extends sfActions
     
      public function executeCircunscripcion(sfWebRequest $request)
     {
-		$this->circunscripcion = array (
-			'juzgadoA' => array(
-				'nombre' => 'Camara de Apelaciones Sala A',
-				'juez' => 'Dr. Marcelo Jorge LOPEZ MESA, Dr. Carlos Alberto VELAZQUEZ',
-				'secretario' => 'Dr. José Pablo DESCALZI',
-				'direccion' => 'Av. 9 de Julio 261',
-				'ciudad' => 'Trelew'),
-			'juzgadoB' => array(
-				'nombre' => 'Camara de Apelaciones Sala B',
-				'juez' => 'Dr. Sergio Rubén LUCERO, Dr. Raúl Adrián VERGARA, Dr. Aldo Luis DE CUNTO',
-				'secretario' => 'Dra. Vilma Noemí BIRRI',
-				'direccion' => 'Av. 9 de Julio 261',
-				'ciudad' => 'Trelew'), 
-			'juzgadoC' => array(
-				'nombre' => 'Juzgado Letrado de 1ra. Instancia Civil y Comercial Nº 1',
-				'juez' => 'Dra. Adela Lucia JUAREZ ALDAZABAL',
-				'secretario' => 'Dra. María Esther TAME, Dra. Nancy Noemí ARNAUDO',
-				'direccion' => 'Av. 9 de Julio 261',
-				'ciudad' => 'Trelew'), 
-			'juzgadoD' => array(
-				'nombre' => 'Juzgado Letrado de 1ra. Instancia Civil y Comercial Nº 2',
-				'juez' => 'Dr. Argentino Carlos María FAIELLA PIZZULL',
-				'secretario' => 'Dr. Ubaldo René AGUILERA, Dr. Fernando Daniel SANTOME OSUNA',
-				'direccion' => 'Av. 9 de Julio 261',
-				'ciudad' => 'Trelew'), 
-			'juzgadoE' => array(
-				'nombre' => ' Juzgado de Familia N° 1',
-				'juez' => 'Dra. Gladys Susana RODRIGUEZ',
-				'secretario' => 'Dr. Rodolfo José SANGUINETTI, Dra. Helena Adriana GARCIA MORENO',
-				'direccion' => 'Paraguay 89',
-				'ciudad' => 'Trelew')
-				);
-
-        
+		$metodo = $request->getMethod();
+		if($metodo == 'POST')
+		{
+			$juzgados = new Juzgado();
+			$resultado = $juzgados->listaJson();
+			return $this->renderText($resultado->toJSON());
+		}
     }
 }
 

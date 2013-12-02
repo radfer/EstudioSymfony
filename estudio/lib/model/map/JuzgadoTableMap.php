@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'abogado' table.
+ * This class defines the structure of the 'juzgado' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class AbogadoTableMap extends TableMap
+class JuzgadoTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.AbogadoTableMap';
+    const CLASS_NAME = 'lib.model.map.JuzgadoTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,20 +32,18 @@ class AbogadoTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('abogado');
-        $this->setPhpName('Abogado');
-        $this->setClassname('Abogado');
+        $this->setName('juzgado');
+        $this->setPhpName('Juzgado');
+        $this->setClassname('Juzgado');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('id_abogado', 'IdAbogado', 'TINYINT', true, 3, null);
-        $this->addColumn('apellido', 'Apellido', 'VARCHAR', true, 45, null);
+        $this->addPrimaryKey('id_juzgado', 'IdJuzgado', 'INTEGER', true, 10, null);
         $this->addColumn('nombre', 'Nombre', 'VARCHAR', true, 45, null);
-        $this->addColumn('dni', 'Dni', 'INTEGER', true, 10, null);
-        $this->addColumn('matricula', 'Matricula', 'VARCHAR', true, 45, null);
-        $this->addColumn('telefono', 'Telefono', 'VARCHAR', false, 40, null);
-        $this->addColumn('mail', 'Mail', 'VARCHAR', true, 45, null);
-        $this->addColumn('contrasenia', 'Contrasenia', 'VARCHAR', true, 50, null);
+        $this->addColumn('juez', 'Juez', 'VARCHAR', true, 100, null);
+        $this->addColumn('secretario', 'Secretario', 'VARCHAR', false, 45, null);
+        $this->addColumn('direccion', 'Direccion', 'VARCHAR', true, 45, null);
+        $this->addColumn('ciudad', 'Ciudad', 'VARCHAR', true, 45, null);
         // validators
     } // initialize()
 
@@ -54,8 +52,6 @@ class AbogadoTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Consulta', 'Consulta', RelationMap::ONE_TO_MANY, array('id_abogado' => 'abogado_id', ), null, null, 'Consultas');
-        $this->addRelation('ExpedienteClienteAbogado', 'ExpedienteClienteAbogado', RelationMap::ONE_TO_MANY, array('id_abogado' => 'abogado_id', ), null, null, 'ExpedienteClienteAbogados');
     } // buildRelations()
 
     /**
@@ -76,4 +72,4 @@ class AbogadoTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // AbogadoTableMap
+} // JuzgadoTableMap
